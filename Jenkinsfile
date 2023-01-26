@@ -13,7 +13,7 @@ pipeline {
         NEXUS_USER = "admin"
         NEXUS_PASS = "admin123"
         NEXUS_PROTOCOL = "http"
-        NEXUSIP = "172.31.11.32"
+        NEXUSIP = "172.31.8.23"
         NEXUSPORT = "8081"
         NEXUS_LOGIN = 'nexuslogin'
         RELEASE_REPO = "vprofile-release"
