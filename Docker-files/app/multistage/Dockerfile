@@ -1,13 +1,9 @@
-FROM openjdk:8 AS BUILD_IMAGE
+FROM openjdk:5.0.2 AS BUILD_IMAGE
 RUN apt update && apt install maven -y
-RUN git clone -b vp-docker https://github.com/imranvisualpath/vprofile-repo.git
-RUN cd vprofile-repo && mvn install
+RUN git clone https://github.com/muzmmilkhan/quiz_app.git
+RUN cd quiz_app && mvn install
 
-FROM tomcat:8-jre11
-
-RUN rm -rf /usr/local/tomcat/webapps/*
-
-COPY --from=BUILD_IMAGE vprofile-repo/target/vprofile-v2.war /usr/local/tomcat/webapps/ROOT.war
-
+FROM openjdk:15.0.2
 EXPOSE 8080
-CMD ["catalina.sh", "run"]
+ADD --from=BUILD_IMAGE quiz_app/target/SpringBootQuizApp-0.0.1-SNAPSHOT.jar SpringBootQuizApp-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java", "-jar", "/SpringBootQuizApp-0.0.1-SNAPSHOT.jar"]
