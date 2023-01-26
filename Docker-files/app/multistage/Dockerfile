@@ -5,5 +5,5 @@ RUN cd quiz_app && mvn install
 
 FROM openjdk:15.0.2
 EXPOSE 8080
-ADD --from=BUILD_IMAGE quiz_app/target/SpringBootQuizApp-0.0.1-SNAPSHOT.jar SpringBootQuizApp-0.0.1-SNAPSHOT.jar
+COPY --from=BUILD_IMAGE quiz_app/target/SpringBootQuizApp-0.0.1-SNAPSHOT.jar SpringBootQuizApp-0.0.1-SNAPSHOT.jar
 ENTRYPOINT ["java", "-jar", "/SpringBootQuizApp-0.0.1-SNAPSHOT.jar"]
