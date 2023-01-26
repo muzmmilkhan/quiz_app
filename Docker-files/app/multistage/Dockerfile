@@ -1,5 +1,5 @@
 FROM openjdk:15.0.2 AS BUILD_IMAGE
-RUN apt update && apt install maven -y
+RUN yum update && yum install maven -y
 RUN git clone https://github.com/muzmmilkhan/quiz_app.git
 RUN cd quiz_app && mvn install
 
