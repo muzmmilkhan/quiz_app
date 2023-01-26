@@ -64,9 +64,8 @@ pipeline {
                    -Dsonar.projectName=mkprofile \
                    -Dsonar.projectVersion=1.0 \
                    -Dsonar.sources=src/ \
-                   -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
+                   -Dsonar.java.binaries=target/test-classes/com/devrezaur/main/ \
                    -Dsonar.junit.reportsPath=target/surefire-reports/ \
-                   -Dsonar.jacoco.reportsPath=target/jacoco.exec \
                    -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
               }
             }
@@ -93,15 +92,15 @@ pipeline {
                   artifacts: [
                     [artifactId: 'vproapp',
                      classifier: '',
-                     file: 'target/vprofile-v2.war',
-                     type: 'war']
+                     file: 'target/SpringBootQuizApp-0.0.1-SNAPSHOT.jar',
+                     type: 'jar']
                   ]
                 )
             }
             post {
                 always {
                     echo 'Slack Notifications.'
-                    slackSend channel: '#devops-machin-learning',
+                    slackSend channel: '#algo-eng',
                     color: COLOR_MAP[currentBuild.currentResult],
                     message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
                 }
