@@ -4,10 +4,12 @@ def COLOR_MAP = [
 ]
 pipeline {
 	agent any
+
 	tools {
         jdk "openjdk15"
         maven "mvn"
     }
+
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_USER = "admin"
@@ -24,6 +26,7 @@ pipeline {
         SONARSERVER = 'sonarserver'
         SONARSCANNER = 'sonarscanner'
     }
+
     stages{    
         stage('BUILD'){
             steps {
@@ -70,6 +73,7 @@ pipeline {
               }
             }
         }
+
         stage("Quality Gate") {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
@@ -79,6 +83,7 @@ pipeline {
                 }
             }
         }
+        
         stage("UploadArtifact"){
             steps{
                 nexusArtifactUploader(
